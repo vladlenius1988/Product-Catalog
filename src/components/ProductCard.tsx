@@ -14,12 +14,14 @@ export default function ProductCard({ product }: { product: Product }) {
       <p>{product.category}</p>
       <p>${product.price}</p>
       <p>Rating: {product.rating}</p>
-      <p>Stock: {product.stock}</p>
- {product.discountPercentage ? (
-  <p>Discount: {product.discountPercentage}%</p>
-) : (
-  <p style={{ opacity: 0.6 }}>No discount</p>
-)}
+    <p style={{ color: product.stock > 0 ? "green" : "red" }}>
+  {product.stock > 0 ? "In stock" : "Out of stock"}
+</p>
+<p style={{ color: (product.discountPercentage ?? 0) > 0 ? "green" : "gray" }}>
+  {(product.discountPercentage ?? 0) > 0
+    ? `Discount: ${product.discountPercentage}%`
+    : "No discount"}
+</p>
     </div>
   );
 }
