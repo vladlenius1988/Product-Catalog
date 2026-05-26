@@ -1,7 +1,19 @@
 import ProductCard from "./ProductCard";
 import type { Product } from "../types/Product";
 
-export default function ProductList({ products }: { products: Product[] }) {
+    type Props = {
+  products: Product[];
+  favoriteIds: number[];
+  onToggleFavorite: (id: number) => void;
+};
+
+
+export default function ProductList({
+  products,
+  favoriteIds,
+  onToggleFavorite,
+}: Props) {
+
   return (
     <div style={{
       display: "grid",
@@ -9,7 +21,13 @@ export default function ProductList({ products }: { products: Product[] }) {
       gap: 16
     }}>
       {products.map((p) => (
-        <ProductCard key={p.id} product={p} />
+        <ProductCard
+  key={p.id}
+  product={p}
+  favoriteIds={favoriteIds}
+  onToggleFavorite={onToggleFavorite}
+  
+/>
       ))}
     </div>
   );
