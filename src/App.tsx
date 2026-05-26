@@ -1,11 +1,11 @@
 import './styles/global.css'
+import Layout from "./components/Layout";
+import ProductsPage from "./pages/ProductsPage";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      Product Catalog
-    </div>
+    <Layout>
+      <ProductsPage />
+    </Layout>
   );
 }
-
-export default App;
