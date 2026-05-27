@@ -1,15 +1,27 @@
-import { Link } from "react-router-dom";
+import { useFavoritesContext } from "../context/FavoritesContext";
+import { useCompareContext } from "../context/CompareContext";
 
 export default function Header() {
+  const { favoriteIds } = useFavoritesContext();
+  const { compareIds } = useCompareContext();
+
   return (
-<header className="header">
-  <div className="container">
-    <nav>
-      <Link to="/">Products</Link>
-      <Link to="/favorites">Favorites</Link>
-      <Link to="/compare">Compare</Link>
-    </nav>
-  </div>
-</header>
+    <header className="header">
+      <div className="container">
+        <nav>
+          <a className="nav-link" href="/">Products</a>
+
+          <a className="nav-link" href="/favorites">
+            Favorites
+            {favoriteIds.length > 0 && <span className="dot" />}
+          </a>
+
+          <a className="nav-link" href="/compare">
+            Compare
+            {compareIds.length > 0 && <span className="dot" />}
+          </a>
+        </nav>
+      </div>
+    </header>
   );
 }

@@ -1,16 +1,16 @@
 import { useProducts } from "../hooks/useProducts";
 import ProductList from "../components/ProductList";
-import { useFavorites } from "../hooks/useFavorites";
+import { useFavoritesContext } from "../context/FavoritesContext";
 import { useProductFilters } from "../hooks/useProductFilters";
 import SortSelect from "../components/SortSelect";
 import SearchBar from "../components/SearchBar";
 import FiltersPanel from "../components/FiltersPanel";
-import { useCompare } from "../hooks/useCompare";
+import { useCompareContext } from "../context/CompareContext";
 
 export default function ProductsPage() {
   const { products, loading, error } = useProducts();
-  const { favoriteIds, toggleFavorite } = useFavorites();
-  const { compareIds, toggleCompare } = useCompare();
+  const { favoriteIds, toggleFavorite } = useFavoritesContext();
+ const { compareIds, toggleCompare } = useCompareContext();
 
   const {
     search,

@@ -283,6 +283,17 @@ padding-bottom: 30px;
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 1024px) {
+  .controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
 
 .page-state {
   padding: 40px 0;
@@ -344,4 +355,50 @@ min-height: 16px;
   border-radius: 6px;
   background: #f3f3f3;
   color: #555;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 10px; /* место под dot */
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  right: -2px;
+}
+
+.compare-remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-size: 14px;
+  color: #999;
+
+  transition: 0.2s;
+}
+
+.compare-remove-btn:hover {
+  color: #ff3b30;
+  transform: scale(1.2);
+}
+
+.compare-table th:hover {
+  background: #fafafa;
+}
+
+.controls > * {
+  min-width: 0;
 }

@@ -1,29 +1,31 @@
+import { useCompareContext } from "../context/CompareContext";
 import ComparisonTable from "../components/ComparisonTable";
 import { useProducts } from "../hooks/useProducts";
-import { useCompare } from "../hooks/useCompare";
 
 export default function ComparePage() {
-  const { products, loading, error } = useProducts();
-  const { compareIds } = useCompare();
+  const { products } = useProducts();
+  const { compareIds, toggleCompare } = useCompareContext();
 
-  const comparedProducts = products.filter((p) =>
+  const comparedProducts = products.filter(p =>
     compareIds.includes(p.id)
   );
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  const handleRemove = (id: number) => {
+    toggleCompare(id);
+  };
 
   return (
-    <div>
-
+    <>
       <h1>Compare</h1>
 
       {comparedProducts.length === 0 ? (
         <p>No products selected for comparison</p>
       ) : (
-        <ComparisonTable products={comparedProducts} />
+        <ComparisonTable
+          products={comparedProducts}
+          onRemove={handleRemove}
+        />
       )}
-
-    </div>
+    </>
   );
-  }
+}

@@ -2,9 +2,13 @@ import type { Product } from "../types/Product";
 
 type Props = {
   products: Product[];
+  onRemove: (id: number) => void;
 };
 
-export default function ComparisonTable({ products }: Props) {
+export default function ComparisonTable({
+  products,
+  onRemove,
+}: Props) {
   return (
     <div>
       <table className="compare-table">
@@ -15,7 +19,17 @@ export default function ComparisonTable({ products }: Props) {
             <th>Field</th>
 
             {products.map(p => (
-              <th key={p.id}>
+              <th key={p.id} style={{ position: "relative" }}>
+
+                {/* REMOVE BUTTON */}
+                <button
+                  onClick={() => onRemove(p.id)}
+                  className="compare-remove-btn"
+                  title="Remove from compare"
+                >
+                  ✕
+                </button>
+
                 <img
                   src={p.thumbnail}
                   alt={p.title}
@@ -24,12 +38,16 @@ export default function ComparisonTable({ products }: Props) {
                     height: 60,
                     objectFit: "cover",
                     borderRadius: 8,
-                    marginBottom: 6
+                    marginBottom: 6,
+                    display: "block",
+                    marginInline: "auto"
                   }}
                 />
+
                 <div style={{ fontSize: 13 }}>
                   {p.title}
                 </div>
+
               </th>
             ))}
           </tr>

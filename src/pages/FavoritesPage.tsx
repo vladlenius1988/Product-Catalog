@@ -1,13 +1,13 @@
 import ProductList from "../components/ProductList";
 import { useProducts } from "../hooks/useProducts";
-import { useFavorites } from "../hooks/useFavorites";
-import { useCompare } from "../hooks/useCompare";
+import { useFavoritesContext } from "../context/FavoritesContext";
+import { useCompareContext } from "../context/CompareContext";
 
 export default function FavoritesPage() {
   const { products, loading, error } = useProducts();
 
-  const { favoriteIds, toggleFavorite } = useFavorites();
-  const { compareIds, toggleCompare } = useCompare();
+  const { favoriteIds, toggleFavorite } = useFavoritesContext();
+  const { compareIds, toggleCompare } = useCompareContext();
 
   const favoriteProducts = products.filter((p) =>
     favoriteIds.includes(p.id)
