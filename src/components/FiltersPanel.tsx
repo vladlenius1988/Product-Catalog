@@ -23,6 +23,7 @@ export default function FiltersPanel({
     <>
 
       <select
+        aria-label="Filter by category"
         className="select"
         value={selectedCategory}
         onChange={(e) => onCategoryChange(e.target.value)}
@@ -38,6 +39,7 @@ export default function FiltersPanel({
 <div className="checkbox-group">
   <label>
     <input
+      aria-label="Filter by in-stock"
       type="checkbox"
       checked={inStockOnly}
       onChange={(e) => onInStockChange(e.target.checked)}
@@ -46,7 +48,8 @@ export default function FiltersPanel({
   </label>
 
   <label>
-    <input
+    <input  
+      aria-label="Filter by discounted"
       type="checkbox"
       checked={discountedOnly}
       onChange={(e) => onDiscountedChange(e.target.checked)}

@@ -6,6 +6,7 @@ type Props = {
 export default function SearchBar({ value, onChange }: Props) {
   return (
     <input
+      aria-label="Search products"
       className="search-input"
       type="text"
       value={value}

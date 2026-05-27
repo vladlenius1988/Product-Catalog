@@ -6,6 +6,7 @@ type Props = {
 export default function SortSelect({ value, onChange }: Props) {
   return (
     <select
+      aria-label="Sort products"
       className="select"
       value={value}
       onChange={(e) => onChange(e.target.value)}
