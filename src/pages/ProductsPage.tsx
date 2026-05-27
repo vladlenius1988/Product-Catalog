@@ -6,7 +6,7 @@ import SortSelect from "../components/SortSelect";
 import SearchBar from "../components/SearchBar";
 import FiltersPanel from "../components/FiltersPanel";
 import { useCompare } from "../hooks/useCompare";
-import ComparisonTable from "../components/ComparisonTable";
+
 
 export default function ProductsPage() {
   const { products, loading, error } = useProducts();
@@ -28,13 +28,6 @@ export default function ProductsPage() {
     filteredProducts,
   } = useProductFilters(products);
 
-const favoriteProducts = products.filter(p =>
-  favoriteIds.includes(p.id)
-);
-
-const comparedProducts = products.filter(p =>
-  compareIds.includes(p.id)
-);
 
 if (loading) return <p>Loading...</p>;
 if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -56,28 +49,7 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
 
 <SortSelect value={sortOption} onChange={setSortOption} />
 
-     <h2>Favorites</h2>
-
-{favoriteProducts.length === 0 ? (
-  <p>No favorites yet</p>
-) : (
-  <ProductList
-  products={favoriteProducts}
-  favoriteIds={favoriteIds}
-  onToggleFavorite={toggleFavorite}
-  compareIds={compareIds}
-  onToggleCompare={toggleCompare}
-/>
-)}
-
-
-<h2>Compare</h2>
-
-{comparedProducts.length === 0 ? (
-  <p>No products selected for comparison</p>
-) : (
-  <ComparisonTable products={comparedProducts} />
-)}
+     
 
 
 {filteredProducts.length === 0 ? (
