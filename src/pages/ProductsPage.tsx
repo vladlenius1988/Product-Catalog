@@ -7,7 +7,6 @@ import SearchBar from "../components/SearchBar";
 import FiltersPanel from "../components/FiltersPanel";
 import { useCompare } from "../hooks/useCompare";
 
-
 export default function ProductsPage() {
   const { products, loading, error } = useProducts();
   const { favoriteIds, toggleFavorite } = useFavorites();
@@ -28,41 +27,39 @@ export default function ProductsPage() {
     filteredProducts,
   } = useProductFilters(products);
 
-
-if (loading) return <p>Loading...</p>;
-if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
-    <>
+    <div className="container">
+
       {/* UI controls */}
-     <SearchBar value={search} onChange={setSearch} />
+      <SearchBar value={search} onChange={setSearch} />
 
-   <FiltersPanel
-  categories={categories}
-  selectedCategory={selectedCategory}
-  onCategoryChange={setSelectedCategory}
-  inStockOnly={inStockOnly}
-  onInStockChange={setInStockOnly}
-  discountedOnly={discountedOnly}
-  onDiscountedChange={setDiscountedOnly}
-/>
+      <FiltersPanel
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        inStockOnly={inStockOnly}
+        onInStockChange={setInStockOnly}
+        discountedOnly={discountedOnly}
+        onDiscountedChange={setDiscountedOnly}
+      />
 
-<SortSelect value={sortOption} onChange={setSortOption} />
+      <SortSelect value={sortOption} onChange={setSortOption} />
 
-     
+      {filteredProducts.length === 0 ? (
+        <p>No products match current filters</p>
+      ) : (
+        <ProductList
+          products={filteredProducts}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={toggleFavorite}
+          compareIds={compareIds}
+          onToggleCompare={toggleCompare}
+        />
+      )}
 
-
-{filteredProducts.length === 0 ? (
-  <p>No products match current filters</p>
-) : (
-  <ProductList
-    products={filteredProducts}
-    favoriteIds={favoriteIds}
-    onToggleFavorite={toggleFavorite}
-    compareIds={compareIds}
-    onToggleCompare={toggleCompare}
-  />
-)}
-    </>
+    </div>
   );
 }

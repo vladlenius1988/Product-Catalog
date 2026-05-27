@@ -1,12 +1,9 @@
-import Header from "../components/Header";
 import ComparisonTable from "../components/ComparisonTable";
-
 import { useProducts } from "../hooks/useProducts";
 import { useCompare } from "../hooks/useCompare";
 
 export default function ComparePage() {
   const { products, loading, error } = useProducts();
-
   const { compareIds } = useCompare();
 
   const comparedProducts = products.filter((p) =>
@@ -17,8 +14,7 @@ export default function ComparePage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <Header />
+    <div className="container">
 
       <h1>Compare</h1>
 
@@ -27,6 +23,7 @@ export default function ComparePage() {
       ) : (
         <ComparisonTable products={comparedProducts} />
       )}
-    </>
+
+    </div>
   );
-}
+  }

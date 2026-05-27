@@ -1,6 +1,4 @@
-import Header from "../components/Header";
 import ProductList from "../components/ProductList";
-
 import { useProducts } from "../hooks/useProducts";
 import { useFavorites } from "../hooks/useFavorites";
 import { useCompare } from "../hooks/useCompare";
@@ -19,8 +17,7 @@ export default function FavoritesPage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <Header />
+    <div className="container">
 
       <h1>Favorites</h1>
 
@@ -35,6 +32,7 @@ export default function FavoritesPage() {
           onToggleCompare={toggleCompare}
         />
       )}
-    </>
+
+    </div>
   );
 }

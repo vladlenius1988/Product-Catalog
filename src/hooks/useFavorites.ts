@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 export function useFavorites() {
-  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => {
-    const saved = localStorage.getItem("favorites");
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favoriteIds));
-  }, [favoriteIds]);
+  const [favoriteIds, setFavoriteIds] = useLocalStorage<number[]>(
+    "favorites",
+    []
+  );
 
   const toggleFavorite = (id: number) => {
-    setFavoriteIds((prev) =>
+    setFavoriteIds(prev =>
       prev.includes(id)
-        ? prev.filter((i) => i !== id)
+        ? prev.filter(i => i !== id)
         : [...prev, id]
     );
   };

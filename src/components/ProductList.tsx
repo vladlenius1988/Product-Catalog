@@ -19,13 +19,7 @@ export default function ProductList({
   onToggleCompare,
 }: Props) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-        gap: 16,
-      }}
-    >
+    <div className="product-grid">
       {products.map((p) => (
         <ProductCard
           key={p.id}

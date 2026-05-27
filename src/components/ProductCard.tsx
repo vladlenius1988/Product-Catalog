@@ -5,7 +5,7 @@ type Props = {
   favoriteIds: number[];
   onToggleFavorite: (id: number) => void;
   compareIds: number[];
-onToggleCompare: (id: number) => void;
+  onToggleCompare: (id: number) => void;
 };
 
 export default function ProductCard({
@@ -13,57 +13,57 @@ export default function ProductCard({
   favoriteIds,
   onToggleFavorite,
   compareIds,
-  onToggleCompare
+  onToggleCompare,
 }: Props) {
   const isFavorite = favoriteIds.includes(product.id);
   const isCompared = compareIds.includes(product.id);
 
   return (
-    <div style={{ border: "1px solid #ddd", padding: 12, position: "relative" }}>
-      
-<div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
-  <button
-    onClick={() => onToggleFavorite(product.id)}
-    style={{
-      background: "transparent",
-      border: "none",
-      fontSize: 18,
-      cursor: "pointer",
-    }}
-  >
-    {isFavorite ? "❤️" : "🤍"}
-  </button>
+    <div className="product-card">
 
-  <button onClick={() => onToggleCompare(product.id)} disabled={!isCompared && compareIds.length >= 3}>
-    {isCompared ? "✓ In compare" : "⚖ Compare"}
-  </button>
-</div>
+      {/* ACTIONS */}
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+        <button
+          className="favorite-btn"
+          onClick={() => onToggleFavorite(product.id)}
+        >
+          {isFavorite ? "❤️" : "🤍"}
+        </button>
 
-      <img
-        src={product.thumbnail}
-        alt={product.title}
-        width={100}
-      />
+        <button
+          className="compare-btn"
+          onClick={() => onToggleCompare(product.id)}
+          disabled={!isCompared && compareIds.length >= 3}
+        >
+          {isCompared ? "✓ In compare" : "⚖ Compare"}
+        </button>
+      </div>
 
+      {/* IMAGE */}
+      <img src={product.thumbnail} alt={product.title} />
+
+      {/* CONTENT */}
       <h3>{product.title}</h3>
 
       <p>{product.brand || "No brand"}</p>
-
       <p>{product.category}</p>
-
       <p>${product.price}</p>
-
       <p>Rating: {product.rating}</p>
 
-      <p style={{ color: product.stock > 0 ? "green" : "red" }}>
-        {product.stock > 0 ? "In stock" : "Out of stock"}
+      <p>
+        <span style={{ color: product.stock > 0 ? "green" : "red" }}>
+          {product.stock > 0 ? "In stock" : "Out of stock"}
+        </span>
       </p>
 
-      <p style={{ color: (product.discountPercentage ?? 0) > 0 ? "green" : "gray" }}>
-        {(product.discountPercentage ?? 0) > 0
-          ? `Discount: ${product.discountPercentage}%`
-          : "No discount"}
+      <p>
+        <span style={{ color: (product.discountPercentage ?? 0) > 0 ? "green" : "gray" }}>
+          {(product.discountPercentage ?? 0) > 0
+            ? `Discount: ${product.discountPercentage}%`
+            : "No discount"}
+        </span>
       </p>
+
     </div>
   );
 }
