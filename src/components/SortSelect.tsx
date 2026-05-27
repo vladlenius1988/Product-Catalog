@@ -10,10 +10,10 @@ export default function SortSelect({ value, onChange }: Props) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
-      <option value="price-asc">Price ↑</option>
-      <option value="price-desc">Price ↓</option>
-      <option value="rating">Rating</option>
-      <option value="title">Title</option>
+      <option value="price-asc">Sort: Price (Low → High)</option>
+      <option value="price-desc">Sort: Price (High → Low)</option>
+      <option value="rating">Sort: Rating</option>
+      <option value="title">Sort: Name</option>
     </select>
   );
 }

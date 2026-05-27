@@ -17,13 +17,14 @@ export default function FavoritesPage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="container">
+    <div>
 
       <h1>Favorites</h1>
 
       {favoriteProducts.length === 0 ? (
         <p>No favorites yet</p>
       ) : (
+        <div className="page-section">
         <ProductList
           products={favoriteProducts}
           favoriteIds={favoriteIds}
@@ -31,6 +32,7 @@ export default function FavoritesPage() {
           compareIds={compareIds}
           onToggleCompare={toggleCompare}
         />
+        </div>
       )}
 
     </div>

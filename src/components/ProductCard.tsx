@@ -17,26 +17,39 @@ export default function ProductCard({
 }: Props) {
   const isFavorite = favoriteIds.includes(product.id);
   const isCompared = compareIds.includes(product.id);
+  const isDisabled = !isCompared && compareIds.length >= 3;
 
   return (
     <div className="product-card">
 
       {/* ACTIONS */}
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-        <button
-          className="favorite-btn"
-          onClick={() => onToggleFavorite(product.id)}
-        >
-          {isFavorite ? "❤️" : "🤍"}
-        </button>
+<div className="actions">
 
-        <button
-          className="compare-btn"
-          onClick={() => onToggleCompare(product.id)}
-          disabled={!isCompared && compareIds.length >= 3}
-        >
-          {isCompared ? "✓ In compare" : "⚖ Compare"}
-        </button>
+  <button
+    className="favorite-btn"
+    onClick={() => onToggleFavorite(product.id)}
+  >
+    {isFavorite ? "❤️" : "🤍"}
+  </button>
+
+  <div className="compare-wrapper">
+    <button
+      className={`compare-btn ${isCompared ? "filled" : "outlined"}`}
+      onClick={() => onToggleCompare(product.id)}
+      disabled={isDisabled}
+    >
+      {isCompared ? "✓ In compare" : "⚖ Compare"}
+    </button>
+
+    {isDisabled && (
+      <p className="compare-hint">
+        Compare limit: 3 products
+      </p>
+    )}
+  </div>
+
+
+        
       </div>
 
       {/* IMAGE */}
@@ -45,10 +58,14 @@ export default function ProductCard({
       {/* CONTENT */}
       <h3>{product.title}</h3>
 
-      <p>{product.brand || "No brand"}</p>
-      <p>{product.category}</p>
-      <p>${product.price}</p>
-      <p>Rating: {product.rating}</p>
+       <p className="brand">
+        {product.brand ?? "Unknown brand"}
+      </p>
+      <span className="category-tag">
+  {product.category}
+</span>
+       <p className="price">${product.price}</p>
+      <p className="rating">⭐ {product.rating.toFixed(1)} / 5</p>
 
       <p>
         <span style={{ color: product.stock > 0 ? "green" : "red" }}>

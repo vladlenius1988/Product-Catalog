@@ -8,8 +8,9 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  background: #f7f7f7;
   color: #222;
+  margin: 0;
 }
 
 /* LAYOUT */
@@ -17,18 +18,26 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
-  margin-bottom: 24px;
+  padding: 0 16px;
+  
 }
+
+
 
 /* HEADER */
 
 .header {
-  display: flex;
-  gap: 20px;
-  padding: 20px 0;
-  margin-bottom: 24px;
+  width: 100%;
   border-bottom: 1px solid #ddd;
+  margin-bottom: 24px;
+}
+
+
+
+.header nav {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
 }
 
 .header a {
@@ -45,9 +54,10 @@ body {
 /* CONTROLS */
 
 .controls {
-  display: flex;
-  flex-wrap: wrap;
+ display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
+  flex-wrap: nowrap;
   margin-bottom: 24px;
 }
 
@@ -58,12 +68,28 @@ body {
   border-radius: 8px;
   background: white;
   min-width: 220px;
+  color: #666;
 }
 
 .checkbox-group {
   display: flex;
+  justify-content: space-between;
+  gap: 12px;
   align-items: center;
-  gap: 8px;
+  flex: 1;
+   grid-column: span 1;
+  width: 100%;
+   padding: 8px 12px;
+   background: #fafafa;
+   border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-radius: 8px;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* расстояние чекбокс ↔ текст */
+  cursor: pointer;
 }
 
 /* PRODUCT GRID */
@@ -81,10 +107,16 @@ body {
   border-radius: 12px;
   padding: 16px;
   position: relative;
-
+padding-bottom: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   transition: transform 0.2s, box-shadow 0.2s;
+ display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+
+
 }
 
 .product-card:hover {
@@ -113,6 +145,31 @@ body {
 
 /* BUTTONS */
 
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+   min-height: 70px;
+}
+
+.actions-row {
+  display: flex;
+  justify-content: space-between;
+   align-items: center; /* важно */
+}
+
+.compare-wrapper {
+  display: flex;
+  flex-direction: column; /* ← критично */
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 32px;
+  width: 140px;
+   flex-shrink: 0;
+  min-width: 120px;
+}
+
 .favorite-btn,
 .compare-btn {
   border: none;
@@ -121,6 +178,19 @@ body {
   padding: 8px 12px;
 
   transition: 0.2s;
+}
+
+/* НЕ В КОМПАРЕ */
+.compare-btn.outlined {
+  background: transparent;
+  border: 1px solid #0077ff;
+  color: #0077ff;
+}
+
+/* В КОМПАРЕ */
+.compare-btn.filled {
+  background: #0077ff;
+  color: white;
 }
 
 .favorite-btn {
@@ -137,7 +207,7 @@ body {
 }
 
 .compare-btn {
-  margin-bottom: 12px;
+  
 
   background: #0077ff;
   color: white;
@@ -147,6 +217,8 @@ body {
   opacity: 0.9;
 }
 
+
+
 /* TABLE */
 
 .compare-table {
@@ -154,7 +226,7 @@ body {
   border-collapse: collapse;
   background: white;
   margin-top: 20px;
-
+  table-layout: fixed;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -163,10 +235,16 @@ body {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .compare-table th {
-  background: #f0f0f0;
+    position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
 }
 
 /* STATES */
@@ -204,4 +282,66 @@ body {
   .product-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.page-state {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+}
+
+.page-state.error {
+  color: red;
+}
+
+.empty-state {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+}
+.page-section {
+  margin-top: 24px;
+}
+
+.compare-hint {
+  
+min-height: 16px;
+
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.rating {
+  color: #444;
+}
+
+.stock.in {
+  color: green;
+}
+
+.stock.out {
+  color: red;
+}
+
+.discount {
+  color: #777;
+}
+
+.brand {
+  color: #666;
+  font-size: 13px;
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #f3f3f3;
+  color: #555;
 }

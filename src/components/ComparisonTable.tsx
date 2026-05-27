@@ -6,19 +6,38 @@ type Props = {
 
 export default function ComparisonTable({ products }: Props) {
   return (
-    <div className="container">
+    <div>
       <table className="compare-table">
+
+        {/* HEADER */}
         <thead>
           <tr>
             <th>Field</th>
 
             {products.map(p => (
-              <th key={p.id}>{p.title}</th>
+              <th key={p.id}>
+                <img
+                  src={p.thumbnail}
+                  alt={p.title}
+                  style={{
+                    width: 60,
+                    height: 60,
+                    objectFit: "cover",
+                    borderRadius: 8,
+                    marginBottom: 6
+                  }}
+                />
+                <div style={{ fontSize: 13 }}>
+                  {p.title}
+                </div>
+              </th>
             ))}
           </tr>
         </thead>
 
+        {/* BODY */}
         <tbody>
+
           <tr>
             <td>Price</td>
             {products.map(p => (
@@ -29,21 +48,30 @@ export default function ComparisonTable({ products }: Props) {
           <tr>
             <td>Rating</td>
             {products.map(p => (
-              <td key={p.id}>{p.rating}</td>
+              <td key={p.id}>
+                ⭐ {p.rating.toFixed(1)}
+              </td>
             ))}
           </tr>
 
           <tr>
             <td>Stock</td>
             {products.map(p => (
-              <td key={p.id}>{p.stock}</td>
+              <td
+                key={p.id}
+                style={{ color: p.stock > 0 ? "green" : "red" }}
+              >
+                {p.stock > 0 ? "In stock" : "Out of stock"}
+              </td>
             ))}
           </tr>
 
           <tr>
             <td>Category</td>
             {products.map(p => (
-              <td key={p.id}>{p.category}</td>
+              <td key={p.id}>
+                📦 {p.category}
+              </td>
             ))}
           </tr>
 
@@ -51,10 +79,13 @@ export default function ComparisonTable({ products }: Props) {
             <td>Discount</td>
             {products.map(p => (
               <td key={p.id}>
-                {p.discountPercentage ?? 0}%
+                {p.discountPercentage
+                  ? `-${p.discountPercentage.toFixed(1)}%`
+                  : "No discount"}
               </td>
             ))}
           </tr>
+
         </tbody>
       </table>
     </div>

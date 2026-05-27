@@ -14,10 +14,7 @@ export function useCompare() {
       return;
     }
 
-    if (compareIds.length >= 3) {
-      alert("You can compare up to 3 products");
-      return;
-    }
+   
 
     setCompareIds(prev => [...prev, id]);
   };

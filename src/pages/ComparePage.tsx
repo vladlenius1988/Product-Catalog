@@ -14,7 +14,7 @@ export default function ComparePage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="container">
+    <div>
 
       <h1>Compare</h1>
 

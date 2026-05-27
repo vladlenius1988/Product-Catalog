@@ -20,14 +20,14 @@ export default function FiltersPanel({
   onDiscountedChange,
 }: Props) {
   return (
-    <div className="controls">
+    <>
 
       <select
         className="select"
         value={selectedCategory}
         onChange={(e) => onCategoryChange(e.target.value)}
       >
-        <option value="">All</option>
+        <option value="">All categories</option>
 
         {categories.map((cat) => (
           <option key={cat} value={cat}>
@@ -35,25 +35,26 @@ export default function FiltersPanel({
           </option>
         ))}
       </select>
+<div className="checkbox-group">
+  <label>
+    <input
+      type="checkbox"
+      checked={inStockOnly}
+      onChange={(e) => onInStockChange(e.target.checked)}
+    />
+    In stock
+  </label>
 
-      <label className="checkbox-group">
-        <input
-          type="checkbox"
-          checked={inStockOnly}
-          onChange={(e) => onInStockChange(e.target.checked)}
-        />
-        In stock
-      </label>
+  <label>
+    <input
+      type="checkbox"
+      checked={discountedOnly}
+      onChange={(e) => onDiscountedChange(e.target.checked)}
+    />
+    Discounted
+  </label>
+</div>
 
-      <label className="checkbox-group">
-        <input
-          type="checkbox"
-          checked={discountedOnly}
-          onChange={(e) => onDiscountedChange(e.target.checked)}
-        />
-        Discounted
-      </label>
-
-    </div>
+    </>
   );
 }

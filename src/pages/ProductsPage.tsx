@@ -27,16 +27,19 @@ export default function ProductsPage() {
     filteredProducts,
   } = useProductFilters(products);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  // ✅ LOADING inside same layout flow (NO shift)
+  if (loading) {
+    return <p className="page-state">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="page-state error">{error}</p>;
+  }
 
   return (
-    <div className="container">
-
-      {/* UI controls */}
-      <SearchBar value={search} onChange={setSearch} />
-
-      <FiltersPanel
+    <>
+     <div className="controls">
+  <FiltersPanel
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
@@ -45,12 +48,20 @@ export default function ProductsPage() {
         discountedOnly={discountedOnly}
         onDiscountedChange={setDiscountedOnly}
       />
+  <SearchBar value={search} onChange={setSearch} />
+  <SortSelect value={sortOption} onChange={setSortOption} />
+</div>
+      
 
-      <SortSelect value={sortOption} onChange={setSortOption} />
+      
 
+      
+
+      {/* CONTENT */}
       {filteredProducts.length === 0 ? (
-        <p>No products match current filters</p>
+        <p className="empty-state">No products match current filters</p>
       ) : (
+        <div className="page-section">
         <ProductList
           products={filteredProducts}
           favoriteIds={favoriteIds}
@@ -58,8 +69,8 @@ export default function ProductsPage() {
           compareIds={compareIds}
           onToggleCompare={toggleCompare}
         />
+        </div>
       )}
-
-    </div>
+    </>
   );
 }
